@@ -21,7 +21,10 @@ class CustomerDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'customer.action');
+            ->addColumn('action', function($query){
+                $actionBtn = '<a href="javascript:void(0)" data-id="'.$query->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" data-id="'.$query->id.'" class="delete btn btn-danger btn-sm">Delete</a>';
+                return $actionBtn;
+            });
     }
 
     /**
@@ -47,7 +50,7 @@ class CustomerDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(3)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
@@ -65,15 +68,15 @@ class CustomerDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 

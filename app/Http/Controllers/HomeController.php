@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index(CustomerDataTable $dataTable)
     {
         $test =  $dataTable->render('customer.index');
+        // dd($test);
         return $test;
-        dd($test);
     }
 }

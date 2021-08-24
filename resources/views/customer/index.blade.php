@@ -1,3 +1,5 @@
+{{-- @dd($dataTable->table()) --}}
+
 @extends('layouts.app')
 
 @section('content')
